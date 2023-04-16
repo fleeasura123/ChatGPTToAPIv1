@@ -17,7 +17,7 @@ g_app.post('/api/ai', async (req, res) => {
 
         g_isFinishedAnswering = false;
         
-        const question = req.body.content;
+        const question = req.body.content.trim();
         let answer = null;
         
         // Type the question you want in ChatGPT message input
