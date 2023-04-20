@@ -1,7 +1,8 @@
 const express = require('express');
 const cors = require('cors');
+require('dotenv').config({path:'./.env'});
 
-const webApiPort = 18000;
+const webApiPort = process.env.WEBAPI_PORT;
 
 global.g_app = express();
 
