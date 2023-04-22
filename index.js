@@ -21,6 +21,12 @@
 
     await g_page.goto('https://chat.openai.com/chat');
 
+    g_page.on('response', async (response) => {
+        if (response.status() === 403) {
+          await g_page.reload();
+        }
+    });
+
     /**
      * AI Status
      */

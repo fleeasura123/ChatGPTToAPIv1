@@ -5,6 +5,12 @@ async function setSelectVal(sel, val) {
     }, {sel, val})
 }
 
+g_app.get('/', async (req, res) => {
+    return res.json({
+        success: true
+    });
+});
+
 g_app.post('/api/ai', async (req, res) => {
     try {
 
