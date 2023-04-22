@@ -55,11 +55,11 @@ g_app.post('/api/ai', async (req, res) => {
 
         if(!global.g_chatUrl)
         {
-            g_page.reload();
+            await g_page.reload();
             await waitForLoading();
             await chat('hi, are you an ai?');
 
-            g_page.reload();
+            await g_page.reload();
             await waitForLoading();
             await chat('hi, are you an ai?');
 
@@ -80,14 +80,14 @@ g_app.post('/api/ai', async (req, res) => {
                 await sleep(1000);
             }
 
-            g_page.reload();
+            await g_page.reload();
 
             await waitForLoading();
         }
 
         if(req.body.is_refresh)
         {
-            g_page.reload();
+            await g_page.reload();
             await waitForLoading();
         }
 
