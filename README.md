@@ -36,7 +36,8 @@ POST
 Payload
 ```json
 {
-    "content": "How to write comments in javascipt?"
+    "content": "How to write comments in javascipt?",
+    "is_refresh": true // will refresh the browser before doing the request
 }
 ```
 
