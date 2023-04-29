@@ -63,7 +63,7 @@ g_app.post('/api/ai', async (req, res) => {
             await waitForLoading();
             await chat('hi, are you an ai?');
 
-            const secondChat = await g_page.waitForSelector('nav > div > div a:nth-child(2)');
+            const secondChat = await g_page.waitForSelector('nav ol li:nth-child(2)');
 
             await secondChat.click();
 
