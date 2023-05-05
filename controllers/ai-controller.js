@@ -33,7 +33,7 @@ const chat = async (question) => {
     await button.click();
     
     // First request is your question only
-    await g_page.waitForRequest('https://chat.openai.com/backend-api/moderations');
+    // await g_page.waitForRequest('https://chat.openai.com/backend-api/moderations');
 
     // Second request is your question with answer
     const secondRequest = await g_page.waitForRequest('https://chat.openai.com/backend-api/moderations');
@@ -53,43 +53,46 @@ g_app.post('/api/ai', async (req, res) => {
                 message: 'AI is not done answering the previous question'
             });
 
-        if(!global.g_chatUrl)
-        {
-            await g_page.reload();
-            await waitForLoading();
-            await chat('hi, are you an ai?');
+        // if(!global.g_chatUrl)
+        // {
+        //     await g_page.reload();
+        //     await waitForLoading();
+        //     await chat('hi, are you an ai?');
 
-            await g_page.reload();
-            await waitForLoading();
-            await chat('hi, are you an ai?');
+        //     await g_page.reload();
+        //     await waitForLoading();
+        //     await chat('hi, are you an ai?');
 
-            const secondChat = await g_page.waitForSelector('nav ol li:nth-child(2)');
+        //     const secondChat = await g_page.waitForSelector('nav ol li:nth-child(2)');
 
-            await secondChat.click();
+        //     await secondChat.click();
 
-            while(!global.g_chatUrl)
-            {
-                const url = await g_page.url();
+        //     while(!global.g_chatUrl)
+        //     {
+        //         const url = await g_page.url();
 
-                if(url.includes('/c/'))
-                {
-                    global.g_chatUrl = url;
-                    break;
-                }
+        //         if(url.includes('/c/'))
+        //         {
+        //             global.g_chatUrl = url;
+        //             break;
+        //         }
 
-                await sleep(1000);
-            }
+        //         await sleep(1000);
+        //     }
 
-            await g_page.reload();
+        //     await g_page.reload();
 
-            await waitForLoading();
-        }
+        //     await waitForLoading();
+        // }
 
-        if(req.body.is_refresh)
-        {
-            await g_page.reload();
-            await waitForLoading();
-        }
+        // if(req.body.is_refresh)
+        // {
+        //     await g_page.reload();
+        //     await waitForLoading();
+        // }
+
+        await g_page.reload();
+        await waitForLoading();
 
         g_isFinishedAnswering = false;
         
@@ -110,10 +113,11 @@ g_app.post('/api/ai', async (req, res) => {
             success: true,
             data: {
                 question,
-                answer
+                answer: response.input.trim()
             }
         });
     } catch (err) {
+        console.log(err);
         g_isFinishedAnswering = true;
 
         return res.json({
