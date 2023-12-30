@@ -17,8 +17,8 @@ const sleep = (ms) => {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function randomFrom3to6() {
-    return Math.floor(Math.random() * 4) + 3;
+function getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
 const chat = async (question) => {
@@ -35,7 +35,7 @@ const chat = async (question) => {
     
     await g_page.waitForSelector('textarea[tabindex="0"]~button[disabled]');
     
-    await sleep(randomFrom3to6() * 1000);
+    await sleep(getRandomNumber(2,4) * 1000);
 
     // Extract the inner HTML of the last matching element
     const lastElementHTML = await g_page.evaluate(() => {
