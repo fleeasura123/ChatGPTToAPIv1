@@ -35,7 +35,7 @@ const chat = async (question) => {
     
     await g_page.waitForSelector('textarea[tabindex="0"]~button[disabled]');
     
-    await sleep(getRandomNumber(2,4) * 1000);
+    await sleep(getRandomNumber(1,2) * 1000);
 
     // Extract the inner HTML of the last matching element
     const lastElementHTML = await g_page.evaluate(() => {
